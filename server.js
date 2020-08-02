@@ -26,7 +26,9 @@ const db = knex({
   }
 });
 
-app.get('/users',(req,res)=>{users.handleUsers(req,res,db)})
+app.get('/',(req,res)=>{res.send("Server Funcionando")});
+
+app.get('/users',(req,res)=>{users.handleUsers(req,res,db)});
 
 app.post('/signin',(req,res)=>{signIn.handleSignIn(req,res,db,bcrypt)});
 
@@ -38,6 +40,6 @@ app.put('/image',(req,res)=>{image.handleImage(req,res,db)});
 
 app.post('/imageurl',(req,res)=>{image.handleApiCall(req,res)});
 
-app.listen(3009,()=>{
-	console.log('app is listening in port 3009');
+app.listen(process.env.PORT || 3000,()=>{
+	console.log(`app is listening in port ${process.env.PORT}`);
 });
