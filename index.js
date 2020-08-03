@@ -17,12 +17,12 @@ const someOtherPlaintextPassword = 'not_lupus';
 
 
 const db = knex({
-  client: 'mysql',
+  client: 'pg',
   connection: {
     host : '127.0.0.1',
-    user : 'root',
-    password : 'mysql',
-    database : 'reactapp1'
+    user : 'enzo',
+    password : 'grog_23_!',
+    database : 'reactapp'
   }
 });
 
@@ -42,6 +42,6 @@ app.put('/image',(req,res)=>{image.handleImage(req,res,db)});
 app.post('/imageurl',(req,res)=>{image.handleApiCall(req,res)});
 
 const port =process.env.PORT;
-app.listen(port || 8080 ,()=>{
+app.listen(port || 3009 ,()=>{
 	console.log(`app is listening in port ${port}`);
 });

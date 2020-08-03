@@ -7,12 +7,12 @@ const handleSignUp = (req,res,database,bcrypt)=>{
 	const hash = bcrypt.hashSync(password, salt);
 
 	database.transaction(trx => {
-		let password ={passwordHash:hash};
-	  	database.insert({nombre: nombre, email: email, joined: new Date()}).into('user')
+		let password ={passwordhash:hash};
+	  	database.insert({nombre: nombre, email: email, joined: new Date()}).into('users').returning('id')
 	  	.transacting(trx)
 		    .then(id => {
-		      password.userId= id[0];
-		      return database('userpassword').insert(password).transacting(trx);
+		      password.userid= id[0];
+		      return database('userpassword').insert(password).returning('userid').transacting(trx);
 		    })
 	    	.then(trx.commit)
 	    	.catch(trx.rollback);

@@ -1,6 +1,6 @@
 const handleProfile = (req,res,database) =>{
 	const {id} = req.params;
-	database('user').where({id:id}).select('*')
+	database('users').where({id:id}).select('*')
 	.then(data =>{
 		if(data.length){
 			res.status(200).json(data[0])

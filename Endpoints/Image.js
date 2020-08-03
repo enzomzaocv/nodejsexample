@@ -22,11 +22,11 @@ const handleApiCall=(req,res)=>{
 
 function handleImage(req,res,database){
 	const {id} = req.body;
-	database('user').where({id:id}).increment('entries', 1)
+	database('users').where({id:id}).increment('entries', 1).returning('entries')
 	.then( data =>{
 		console.log(data)
-		if(data){
-			res.status(200).json(data);
+		if(data[0]){
+			res.status(200).json(data[0]);
 		}else{
 			res.status(400).json('error');
 		}

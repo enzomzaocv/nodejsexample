@@ -5,15 +5,15 @@ const handleSignIn = (req,res,database,bcrypt)=>{
 		return res.status(400).json("Revisa tu email y password")
 	}
 	database
-	.columns('user.email','userpassword.passwordHash')
+	.columns('users.email','userpassword.passwordhash')
 	.select()
-	.from('user')
+	.from('users')
 	.where('email',email)
-	.innerJoin('userpassword', 'user.id', 'userpassword.userId')
+	.innerJoin('userpassword', 'users.id', 'userpassword.userid')
 	.then(data=>{
-		const esValido = bcrypt.compareSync(password, data[0].passwordHash);
+		const esValido = bcrypt.compareSync(password, data[0].passwordhash);
 			if(esValido){
-				return database.select('*').from('user').where('email','=',email)
+				return database.select('*').from('users').where('email','=',email)
 				.then(user=>{
 					res.status(200).json(user[0]);
 				})
