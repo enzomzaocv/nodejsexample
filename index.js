@@ -11,9 +11,6 @@ const users = require('./Endpoints/Users.js')
 const bcrypt = require('bcrypt');
 app.use(bodyParser.json());
 app.use(cors());
-const saltRounds = 10;
-const myPlaintextPassword = 'enzoide';
-const someOtherPlaintextPassword = 'not_lupus';
 
 
 const db = knex({
